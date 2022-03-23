@@ -20,10 +20,9 @@ export default function Solucion1({ metaTags,solucion_1}) {
   if (session && status == 'authenticated') { 
       console.log('session',session,session.user.email , loading,status)
  
- savePicanter(databaseUsers,session.user.email, moment().format("YYYY-MM-DD"));
+    // savePicanter(databaseUsers,session.user.email, moment().format("YYYY-MM-DD"));
 
-
-} 
+  } 
 
   return (
     <>
