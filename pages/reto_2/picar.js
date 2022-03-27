@@ -6,12 +6,12 @@ import { useSession,getSession,signIn, signOut } from "next-auth/react"
 export const databaseId = process.env.NOTION_DATABASE_ID;
 export const databaseUsers = process.env.NOTION_DATABASE_USERS;
 
-
 export default function Picar_r2({getIntentos}) {  
 
+  const { data: session, loading, status } = useSession();
   const router = useRouter()
 
-  const { data: session } = useSession();
+  if (session && status == "authenticated") {
   const porrazos = 0;
   
   const { intentos,page }  = getIntentos.datosSave; 
@@ -29,7 +29,7 @@ console.log(' intentos,page ', intentos,page )
         console.log('SIGUE!')
         }
     }
-
+  }
 
   return (
     <> 
