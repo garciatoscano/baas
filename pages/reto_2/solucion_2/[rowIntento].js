@@ -18,14 +18,16 @@ export default function Solucion_r2() {
           <div className="card w-100 bg-base-100 shadow-xl">
                 <div className="card-body text-center">           
                   <div className="max-w-md">      
-                        <h2 className="text-3xl font-bold text-white">
-                            {/* Conseguido! {session.user.name || session.user.email}! */}
-                        </h2>
+                            <p className="text-2xl "> {session.user.name || session.user.email}!</p>
+                        
                         <button onClick={signOut} className="btn btn-xs btn-outline mb-9"> Desconectar</button>
                         <div>
+
+                        <h2 className="text-lg font-bold text-accent"> Has conseguido...</h2>
                             <p className='pb-3 text-5xl'> 👑 Oro! </p>
+                            <p className=" mt-6">Quieres más oro? ...</p>
                             <Link href="/reto_2/picar">
-                                 <a className="btn btn-accent btn-lg text-xl mt-6"> Quiero más oro!!  </a>
+                                 <a className="btn btn-accent btn-sm mt-6"> Quiero más oro!!  </a>
                             </Link>
                         </div>
                   </div>
@@ -83,7 +85,8 @@ export async function getServerSideProps(context) {
       }
     return {
        props: { 
-        intentos: getIntentos
+        intentos: getIntentos,
+        session:sessionUser
           }
     };
 }

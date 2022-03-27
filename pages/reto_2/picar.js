@@ -14,7 +14,7 @@ export default function Picar_r2({getIntentos}) {
   const { data: session } = useSession();
   const porrazos = 0;
   
-  const { intentos,page }  = getIntentos.response; 
+  const { intentos,page }  = getIntentos.datosSave; 
 console.log(' intentos,page ', intentos,page )
 
   const cuentaPicar = () =>  {
@@ -55,7 +55,7 @@ console.log(' intentos,page ', intentos,page )
                                 </h2>
                                 <button onClick={signOut} className="btn btn-xs btn-outline mb-9"> Desconectar</button>
                     <div>
-                        <p className='pb-3'>Tienes que picar una o más veces para conseguir más oro</p>
+                        <p className="pb-3 text-xl">Tienes que picar una o más veces <br/>para conseguir más oro</p>
                        <button 
                        onClick={cuentaPicar} className="btn btn-accent btn-lg text-xl mt-3"> ¡Picar! <span className=" ml-3">⛏️</span></button> 
                     </div>
@@ -105,7 +105,7 @@ export async function getServerSideProps(context) {
                     })
                 };
         
-                var getIntentos = await fetch('https://api.notion.com/v1/pages', options)
+        var getIntentos = await fetch('https://api.notion.com/v1/pages', options)
           .then(res => res.json())
           .then((resp) =>{
           console.log(resp.properties.intentos.formula.number )
@@ -113,7 +113,7 @@ export async function getServerSideProps(context) {
           var numIntentos = resp.properties.intentos.formula.number;
           numIntentos == 0 ? numIntentos = 1 : numIntentos = numIntentos;
           return {
-            response: {
+            datosSave: {
               page: resp.id ,
               intentos: numIntentos,
 
