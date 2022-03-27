@@ -5,7 +5,7 @@ import { getMetaTags,getTextos } from '../lib/notion-api';
 // import Footer from '../components/Footer' 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 
-export default function Index({ metaTags ,textos}) { 
+export default function Index({ metaTags,textos}) { 
 
 const [loadingButton, setLoadingButton] = useState(false);
 
@@ -21,8 +21,6 @@ const {h1,hero_text,copy01} = textos;
         <meta name="athor" content={author} />
         <meta name="keywords" content={keywords} /> 
     </Head> 
-
-
 <div className="bg-fondo hero min-h-screen ">
 
     <div className="card w-100 bg-base-100 shadow-xl">
@@ -32,7 +30,7 @@ const {h1,hero_text,copy01} = textos;
             <p className="py-6">{hero_text}</p>
             <p className="py-6">{copy01}</p> 
           {!loadingButton 
-          ?  <Link href="/intermedio_1" ><a className="btn btn-accent btn-md" onClick={() => setLoadingButton(true)}>  Quiero picar!!! </a></Link>
+          ?  <Link href="/reto_1/intermedio_1" ><a className="btn btn-accent btn-lg text-3xl" onClick={() => setLoadingButton(true)}>   picar!!! <span className="animate-spin ">⛏️</span> </a></Link>
           : <p className='text-4xl text-accent'>Picando, picando! ...⛏️⛏️⛏️</p>
           }
 
