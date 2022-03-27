@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^1.0.3",
+    "axios": "^0.26.1",
     "daisyui": "^2.11.0",
     "moment": "^2.29.1",
     "next": "latest",
