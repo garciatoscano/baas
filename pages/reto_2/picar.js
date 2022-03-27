@@ -106,15 +106,15 @@ export async function getServerSideProps(context) {
                 };
         
                 var getIntentos = await fetch('https://api.notion.com/v1/pages', options)
-          .then(response => response.json())
-          .then((response) =>{
-          console.log(response.properties.intentos.formula.number )
+          .then(res => res.json())
+          .then((resp) =>{
+          console.log(resp.properties.intentos.formula.number )
 
-          var numIntentos = response.properties.intentos.formula.number;
+          var numIntentos = resp.properties.intentos.formula.number;
           numIntentos == 0 ? numIntentos = 1 : numIntentos = numIntentos;
           return {
             response: {
-              page: response.id ,
+              page: resp.id ,
               intentos: numIntentos,
 
             }
