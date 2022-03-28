@@ -11,18 +11,17 @@ export const databaseUsers = process.env.NOTION_DATABASE_USERS;
 
 export default function Solucion_r2({ metaTags, statsUser,textos }) {
   const { data: session } = useSession();
+  if (!session) {
+    router.push("/reto_2/picar");
+  }
 
   const [showModal, setShowModal] = React.useState(false);
   const { totalIntentos, incompletos, completos } = statsUser;
-
-  console.log("FRONT statsUser:", totalIntentos, incompletos, completos);
+ 
 
   const { title, description, author, keywords } = metaTags;
 
   const router = useRouter();
-  if (!session) {
-    router.push("/reto_2/picar");
-  }
 
   return (
     <>
@@ -162,8 +161,9 @@ export default function Solucion_r2({ metaTags, statsUser,textos }) {
 
 export async function getServerSideProps(context) {
   const sessionUser = await getSession(context);
+ 
   const textos = await getTextos(databaseId);
-  if (sessionUser == null) {
+  if (sessionUser == null || sessionUser.user == null) {
     context.res.writeHead(302, { Location: "/reto_2/picar" });
   }
 
