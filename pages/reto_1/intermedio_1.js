@@ -1,7 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
+import Head from "next/head"; 
 import Link from "next/link";
 import { getMetaTags, getTextos } from "../../lib/notion-api";
+import Footer from "../../components/Footer";
 
 export default function Intermedop1({ metaTags, textos }) {
   const { title, description, author, keywords } = metaTags;
@@ -30,6 +30,8 @@ export default function Intermedop1({ metaTags, textos }) {
           </div>
         </div>
       </div>
+
+      <Footer textos={textos}></Footer>
     </>
   );
 }

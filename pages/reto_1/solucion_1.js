@@ -1,13 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
-import { useSession } from "next-auth/react";
-import { getMetaTags, getSolucion1 } from "../../lib/notion-api";
+import React from "react"; 
+import { getMetaTags, getSolucion1, getTextos } from "../../lib/notion-api";
+import Footer from "../../components/Footer";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 export const databaseUsers = process.env.NOTION_DATABASE_USERS;
 
-export default function Solucion1({ metaTags, solucion_1 }) {
+export default function Solucion1({ metaTags, solucion_1,textos }) {
   const { title, description, author, keywords } = metaTags;
   const { solucion } = solucion_1;
 
@@ -42,6 +42,7 @@ export default function Solucion1({ metaTags, solucion_1 }) {
           </div>
         </div>
       </div>
+      <Footer textos={textos}></Footer>
     </>
   );
 }
@@ -49,11 +50,13 @@ export default function Solucion1({ metaTags, solucion_1 }) {
 export const getStaticProps = async () => {
   const metaTags = await getMetaTags(databaseId);
   const solucion_1 = await getSolucion1(databaseId);
+  const textos = await getTextos(databaseId);
 
   return {
     props: {
       metaTags: metaTags,
       solucion_1: solucion_1,
+      textos:textos
     },
     revalidate: 1,
   };

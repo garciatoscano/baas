@@ -2,6 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { getMetaTags, getTextos } from "../lib/notion-api";
+import Footer from "../components/Footer";
 export const databaseId = process.env.NOTION_DATABASE_ID;
 
 export default function Index({ metaTags, textos }) {
@@ -32,8 +33,8 @@ export default function Index({ metaTags, textos }) {
                     className="btn btn-accent btn-lg text-3xl"
                     onClick={() => setLoadingButton(true)}
                   >
-                    {" "}
-                    picar!!! <span className="animate-spin ">⛏️</span>{" "}
+                    
+                    picar!!! <span className="animate-spin ">⛏️</span>
                   </a>
                 </Link>
               ) : (
@@ -45,6 +46,7 @@ export default function Index({ metaTags, textos }) {
           </div>
         </div>
       </div>
+      <Footer textos={textos}></Footer>
     </>
   );
 }

@@ -3,13 +3,15 @@ import Head from "next/head";
 import React from "react";
 import { useRouter } from "next/router";
 import { useSession, getSession, signIn, signOut } from "next-auth/react";
-import { getMetaTags } from "../../lib/notion-api";
+import { getMetaTags,getTextos } from "../../lib/notion-api";
+import Footer from "../../components/Footer";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 export const databaseUsers = process.env.NOTION_DATABASE_USERS;
 
-export default function Picar_r2({ getIntentos, metaTags }) {
+export default function Picar_r2({ getIntentos, metaTags,textos }) {
   const { title, description, author, keywords } = metaTags;
+ 
   const { data: session, loading, status } = useSession();
   const router = useRouter();
 
@@ -50,14 +52,13 @@ export default function Picar_r2({ getIntentos, metaTags }) {
                 {!session ? (
                   <>
                     <div className="max-w-md">
-                      <p> Vamos!! </p>
+                      <p>{textos.r2_picar_guest_line_1}</p>
                       <h2 className="text-xl font-bold text-accent">
-                        Aquí solo pican los que se identifican
+                      {textos.r2_picar_guest_line_2}
                       </h2>
                     </div>
                     <p>
-                      Necesitamos tu nombre ... Identifícate!
-                      <em>(por favor)</em>
+                    {textos.r2_picar_guest_line_3}
                     </p>
 
                     <button
@@ -70,7 +71,7 @@ export default function Picar_r2({ getIntentos, metaTags }) {
                         height="30"
                         className="mx-4"
                       />
-                      Entrar
+                      {textos.r2_picar_guest_login_github}
                     </button>
                   </>
                 ) : (
@@ -82,19 +83,16 @@ export default function Picar_r2({ getIntentos, metaTags }) {
                       onClick={signOut}
                       className="btn btn-xs btn-outline-secondary mb-9"
                     >
-                      Desconectar
+                      {textos.btn_logout}
                     </button>
                     <div>
                       <p className="pb-3 text-xl">
-                        Tienes que picar una o más veces <br />
-                        para conseguir más oro
+                        {textos.r2_picar_auth_line_1}
                       </p>
                       <button
                         onClick={cuentaPicar}
                         className="btn btn-accent btn-lg text-xl mt-3"
-                      >
-                        
-                        ¡Picar! <span className=" ml-3">⛏️</span>
+                      >{textos.r2_picar_auth_btn}
                       </button>
                     </div>
                   </>
@@ -104,6 +102,7 @@ export default function Picar_r2({ getIntentos, metaTags }) {
           </div>
         </div>
       </div>
+      <Footer textos={textos}></Footer>
     </>
   );
 }
@@ -111,6 +110,7 @@ export default function Picar_r2({ getIntentos, metaTags }) {
 export async function getServerSideProps(context) {
   const sessionUser = await getSession(context);
   const metaTags = await getMetaTags(databaseId);
+  const textos = await getTextos(databaseId);
   var getIntentos = null;
   if (sessionUser) {
     const databaseNotion = process.env.NOTION_DATABASE_USERS;
@@ -163,6 +163,7 @@ export async function getServerSideProps(context) {
     props: {
       getIntentos: getIntentos,
       metaTags: metaTags,
+      textos: textos,
     },
   };
 }

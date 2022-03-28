@@ -3,12 +3,13 @@ import Head from "next/head";
 import React from "react";
 import { useRouter } from "next/router";
 import { useSession, getSession, signOut } from "next-auth/react";
-import { getMetaTags, getStatsUser } from "../../../lib/notion-api";
+import { getMetaTags, getStatsUser,getTextos } from "../../../lib/notion-api";
+import Footer from "../../../components/Footer";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 export const databaseUsers = process.env.NOTION_DATABASE_USERS;
 
-export default function Solucion_r2({ metaTags, statsUser }) {
+export default function Solucion_r2({ metaTags, statsUser,textos }) {
   const { data: session } = useSession();
 
   const [showModal, setShowModal] = React.useState(false);
@@ -39,12 +40,12 @@ export default function Solucion_r2({ metaTags, statsUser }) {
               <div className=" w-full">
                 <div className="mb-5">
                   <h2 className="text-lg font-bold text-accent">
-                    Has conseguido...
+                    {textos.r2_solucion_auth_line_1}
                   </h2>
-                  <p className="pb-1 text-7xl"> 👑 Oro! </p>
+                  <p className="pb-1 text-7xl">{textos.r2_solucion_auth_line_2}</p>
                   <Link href="/reto_2/picar">
                     <a className="btn btn-accent btn-lg mt-6">
-                      Quiero más oro!!
+                    {textos.r2_solucion_auth_btn}
                     </a>
                   </Link>
                   <div>
@@ -52,7 +53,7 @@ export default function Solucion_r2({ metaTags, statsUser }) {
                       onClick={signOut}
                       className="btn btn-xs btn-outline-secondary  text-xs my-1"
                     >
-                      Desconectar
+                      {textos.btn_logout}
                     </button>
                   </div>
                 </div>
@@ -60,7 +61,7 @@ export default function Solucion_r2({ metaTags, statsUser }) {
                 <div className="bg-slate-700 rounded-lg shadow-inner border border-slate-900 p-3 pb-10">
                   <p className="text-xl pt-6  ">
                     {session.user.name || session.user.email}
-                    <br /> estas son tus estadísticas personales
+                    <br /> {textos.r2_solucion_auth_line_stats}
                   </p>
 
                   <div className="mt-6 grid grid-cols-3 gap-4 place-items-center ...">
@@ -106,6 +107,7 @@ export default function Solucion_r2({ metaTags, statsUser }) {
         </div>
       </div>
 
+      <Footer textos={textos}></Footer>
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -160,6 +162,7 @@ export default function Solucion_r2({ metaTags, statsUser }) {
 
 export async function getServerSideProps(context) {
   const sessionUser = await getSession(context);
+  const textos = await getTextos(databaseId);
   if (sessionUser == null) {
     context.res.writeHead(302, { Location: "/reto_2/picar" });
   }
@@ -209,6 +212,7 @@ export async function getServerSideProps(context) {
       metaTags: metaTags,
       statsUser: statsUser,
       session: sessionUser,
+      textos:textos
     },
   };
 }
