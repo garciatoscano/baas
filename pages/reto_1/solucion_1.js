@@ -1,4 +1,4 @@
-import Head from "next/head"; 
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { useSession } from "next-auth/react";
@@ -8,14 +8,8 @@ export const databaseId = process.env.NOTION_DATABASE_ID;
 export const databaseUsers = process.env.NOTION_DATABASE_USERS;
 
 export default function Solucion1({ metaTags, solucion_1 }) {
-  const { data: session, loading, status } = useSession();
-
   const { title, description, author, keywords } = metaTags;
   const { solucion } = solucion_1;
-
-  if (session && status == "authenticated") {
-    console.log("session", session, session.user.email, loading, status);
-  }
 
   return (
     <>
@@ -31,17 +25,16 @@ export default function Solucion1({ metaTags, solucion_1 }) {
           <div className="card w-100 bg-base-100 shadow-xl">
             <div className="card-body text-center">
               <div className="max-w-md">
-                <h1 className="text-5xl font-bold text-white  animate-pulse ">
+                <h1 className="text-7xl font-bold text-white  animate-pulse ">
                   {solucion}
                 </h1>
                 <p className="pb-9 text-3xl text-accent">
-                  Has encontrado tu primer Oro!{" "}
+                  Has encontrado tu primer Oro!
                 </p>
                 <h2 className=" font-bold text-white">¿Quieres más...?</h2>
                 <Link href="/reto_2/picar">
                   <a className="btn btn-accent btn-lg text-xl mt-6">
-                    {" "}
-                    Continuar ...{" "}
+                    Continuar ...
                   </a>
                 </Link>
               </div>
