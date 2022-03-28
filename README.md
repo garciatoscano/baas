@@ -1,6 +1,6 @@
 # BaaS
 
-##Reto 1
+##Reto  
 Resolver el primer desafío del Reto de danielprimo.io, usando Notion API y Nextjs
 
 [VER DEMO](https://baas.vercel.app/)
