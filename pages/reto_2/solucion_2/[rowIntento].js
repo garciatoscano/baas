@@ -52,7 +52,9 @@ export default function Solucion_r2({ metaTags, statsUser, textos }) {
                   </Link>
                   <div>
                     <button
-                      onClick={signOut}
+                      onClick={() => signOut(
+                        {callbackUrl: '/reto_2/picar'}
+                        )}
                       className="btn btn-xs btn-outline-secondary  text-xs my-1"
                     >
                       {textos.btn_logout}
