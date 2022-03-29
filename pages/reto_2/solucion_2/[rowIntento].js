@@ -101,16 +101,16 @@ export default function Solucion_r2({ metaTags, statsUser, textos }) {
 
                 <div className="mt-1 grid md:grid-cols-2  xs:grid-cols-1 gap-4 place-items-center ">
                   <div className=" stat text-slate-400 rounded-lg shadow-lg p-3 mt-1">
-                    <p className="text-white">Coste del Oro </p>
+                    <p className="text-white">{textos.costeoro_title} </p>
                     <p className="text-5xl font-bold text-accent ">
                       {costeOro.toFixed(2)}
                     </p>
                     <div className="text-lg font-bold text-yellow-400">
-                      GolpesCoin
+                      {textos.costeoro_coin}
                     </div>
 
                     <div className="stat-desc">
-                      Media de Golpes entre intentos completados
+                    {textos.costeoro_legend}
                     </div>
                   </div>
                   <>
