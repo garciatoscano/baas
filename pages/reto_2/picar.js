@@ -16,7 +16,7 @@ export default function Picar_r2({ getIntentos, metaTags,textos }) {
   const router = useRouter();
 
   if (session && status == "authenticated") {
-    const porrazos = 0;
+    const porrazos = 1;
 
     const { intentos, page } = getIntentos.datosSave;
     console.log(" intentos,page ", intentos, page);
