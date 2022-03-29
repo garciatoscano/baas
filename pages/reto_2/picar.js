@@ -25,7 +25,7 @@ export default function Picar_r2({ getIntentos, metaTags,textos }) {
       if (intentos == 0) intentos = 1;
       porrazos++;
 
-      if (porrazos == intentos) {
+      if (porrazos >= intentos) {
         router.push({
           pathname: `/reto_2/solucion_2/${page}`,
         });
